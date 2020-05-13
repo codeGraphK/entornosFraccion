@@ -1,4 +1,4 @@
-package com.entornosFraccion;
+package com.entornosFraccion.model;
 
 public class Fraccion {
 
@@ -17,7 +17,6 @@ public class Fraccion {
 	public int getDen() {
 		return this.iDenominador;
 	}
-
 
 	public void setNum(int numerador) {
 		this.iNumerador = numerador;
