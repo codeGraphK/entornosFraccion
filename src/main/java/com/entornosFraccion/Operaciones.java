@@ -78,5 +78,16 @@ public class Operaciones {
 
 		return frResult;
 	}
+	
+	public static Fraccion multiplicacion(Fraccion frUno, Fraccion frDos) {
+		Fraccion frResult = null;
+
+		int resultNum = frUno.getNum() * frDos.getNum();
+		int resultDen = frUno.getDen() * frDos.getDen();
+
+		frResult = new Fraccion(resultNum, resultDen);
+
+		return frResult;
+	}
 
 }
