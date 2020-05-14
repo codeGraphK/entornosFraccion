@@ -67,5 +67,12 @@ public class Operaciones {
 		}
 		return bPrimo;
 	}
-    
+	
+	public static Fraccion resta(Fraccion frUno, Fraccion frDos) {
+		
+		Fraccion frResult = null;
+
+		int resultDen = frUno.getDen() * frDos.getDen();
+
+	}
 }
