@@ -67,5 +67,16 @@ public class Operaciones {
 		}
 		return bPrimo;
 	}
-    
+	
+	public static Fraccion suma(Fraccion frUno, Fraccion frDos) {
+		Fraccion frResult = null;
+
+		int resultDen = frUno.getDen() * frDos.getDen();
+		int resultNum = (frUno.getNum() * frDos.getDen()) + (frUno.getDen() * frDos.getNum());
+
+		frResult = new Fraccion(resultNum, resultDen);
+
+		return frResult;
+	}
+
 }
