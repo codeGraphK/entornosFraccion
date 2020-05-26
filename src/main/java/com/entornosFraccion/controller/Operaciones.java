@@ -125,4 +125,9 @@ public class Operaciones {
 		return (frIn.getNum() * frIn.getDen())/maxComDivisor(frIn);
 	}
 
+	public static Fraccion simplificacion(Fraccion frIn) {
+		int mcd = maxComDivisor(frIn);
+		return new Fraccion(frIn.getNum()/mcd, frIn.getDen()/mcd);
+	}
+
 }
