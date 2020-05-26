@@ -74,5 +74,13 @@ public class OperacionesTest {
 		assertEquals(numResult, Operaciones.resta(new Fraccion(iUno, iDos), new Fraccion(iDos,iUno)).getNum());
 		assertEquals(denResult, Operaciones.resta(new Fraccion(iUno, iDos), new Fraccion(iDos,iUno)).getDen());
 	}
+	
+	@DisplayName(value = "División")
+	@ParameterizedTest
+	@CsvSource(value = { "8,4,64,16", "6,3,36,9", "10,5,100,25"})
+	public void divisionTest(int iUno, int iDos, int numResult, int denResult) {
+		assertEquals(numResult, Operaciones.division(new Fraccion(iUno, iDos), new Fraccion(iDos,iUno)).getNum());
+		assertEquals(denResult, Operaciones.division(new Fraccion(iUno, iDos), new Fraccion(iDos,iUno)).getDen());
+	}
     
 }
