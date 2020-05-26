@@ -1,4 +1,4 @@
-package com.entornosFraccion;
+package com.entornosFraccion.view;
 
 public class mainFraccion {
     
