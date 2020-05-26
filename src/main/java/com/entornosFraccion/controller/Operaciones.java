@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import com.entornosFraccion.model.Fraccion;
+
 public class Operaciones {
 
     public static boolean esPar(int numero) {
