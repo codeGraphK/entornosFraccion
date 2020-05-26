@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import com.entornosFraccion.controller.Operaciones;
 import com.entornosFraccion.model.Fraccion;
 
-import org.junit.Test;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -58,6 +57,14 @@ public class OperacionesTest {
 	void mcdTest(int num, int den, int result) {
 		Fraccion frToTest = new Fraccion(num, den);
 		assertEquals(result, Operaciones.maxComDivisor(frToTest));
+	}
+	
+	@DisplayName(value = "Mínimo común múltiplo")
+	@ParameterizedTest
+	@CsvSource(value = {"72,50,1800", "6,33,66"})
+	void mcmTest(int num, int den, int result) {
+		Fraccion frToTest = new Fraccion(num, den);
+		assertEquals(result, Operaciones.minComMultiplo(frToTest));
 	}
     
 }
