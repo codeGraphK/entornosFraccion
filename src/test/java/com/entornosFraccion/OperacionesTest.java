@@ -3,6 +3,8 @@ package com.entornosFraccion;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.entornosFraccion.controller.Operaciones;
+import com.entornosFraccion.model.Fraccion;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -47,6 +49,22 @@ public class OperacionesTest {
 	@ValueSource(ints = { 4, 8, 100, 49, 25, 777555222, 1991, 1115 })
 	void esNoPrimoTest(int numero) {
 		assertFalse(Operaciones.esPrimo(numero));
+	}
+
+	@DisplayName(value = "Máximo común divisor")
+	@ParameterizedTest
+	@CsvSource(value = {"24,12,12", "6,4,2", "35,15,5"})
+	void mcdTest(int num, int den, int result) {
+		Fraccion frToTest = new Fraccion(num, den);
+		assertEquals(result, Operaciones.maxComDivisor(frToTest));
+	}
+	
+	@DisplayName(value = "Mínimo común múltiplo")
+	@ParameterizedTest
+	@CsvSource(value = {"72,50,1800", "6,33,66"})
+	void mcmTest(int num, int den, int result) {
+		Fraccion frToTest = new Fraccion(num, den);
+		assertEquals(result, Operaciones.minComMultiplo(frToTest));
 	}
     
 }
