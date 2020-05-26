@@ -66,5 +66,13 @@ public class OperacionesTest {
 		Fraccion frToTest = new Fraccion(num, den);
 		assertEquals(result, Operaciones.minComMultiplo(frToTest));
 	}
+
+	@DisplayName(value = "Resta")
+	@ParameterizedTest
+	@CsvSource(value = { "8,4,48,32", "6,3,27,18", "10,5,75,50"})
+	public void restaTest(int iUno, int iDos, int numResult, int denResult) {
+		assertEquals(numResult, Operaciones.resta(new Fraccion(iUno, iDos), new Fraccion(iDos,iUno)).getNum());
+		assertEquals(denResult, Operaciones.resta(new Fraccion(iUno, iDos), new Fraccion(iDos,iUno)).getDen());
+	}
     
 }
