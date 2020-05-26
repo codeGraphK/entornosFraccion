@@ -69,24 +69,25 @@ public class Operaciones {
 	}
 	
 	public static Fraccion resta(Fraccion frUno, Fraccion frDos) {
-		
 		Fraccion frResult = null;
 
+		int resultNum = (frUno.getNum() * frDos.getDen()) - (frUno.getDen() * frDos.getNum());
 		int resultDen = frUno.getDen() * frDos.getDen();
 
+		frResult = new Fraccion(resultNum, resultDen);
+
+		return frResult;
 	}
 	
 	public static Fraccion division(Fraccion frUno, Fraccion frDos) {
-		
 		Fraccion frResult = null;
 
 		int resultNum = frUno.getNum() * frDos.getDen();
-		
 		int resultDen = frUno.getDen() * frDos.getNum();
 
 		frResult = new Fraccion(resultNum, resultDen);
 
-		return result;
+		return frResult;
 
 	}
 }
