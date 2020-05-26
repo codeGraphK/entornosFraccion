@@ -6,7 +6,7 @@ import com.entornosFraccion.model.Fraccion;
 public class mainFraccion {
 
     public static void main(String[] args) {
-        Fraccion frUno = new Fraccion(42, 56);
+        Fraccion frUno = new Fraccion(24, 12);
         System.out.println(Operaciones.maxComDivisor(frUno));
     }
 
