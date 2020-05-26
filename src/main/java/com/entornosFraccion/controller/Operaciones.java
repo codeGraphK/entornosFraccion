@@ -98,4 +98,8 @@ public class Operaciones {
 		return iResult;
 	}
 
+	public static Integer minComMultiplo(Fraccion frIn) {
+		return (frIn.getNum() * frIn.getDen())/maxComDivisor(frIn);
+	}
+
 }
