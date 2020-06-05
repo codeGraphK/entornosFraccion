@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import com.entornosFraccion.controller.ManejoRegistro;
 import com.entornosFraccion.controller.Operaciones;
-import com.entornosFraccion.controller.RegistroVacioException;
 import com.entornosFraccion.model.Fraccion;
 
 public class mainFraccion {
@@ -19,7 +18,7 @@ public class mainFraccion {
     public static void main(String[] args) {
         mainFraccion mrFraccion = new mainFraccion();
         try {
-            mrFraccion.operacionesLayout("+", "S U M A");
+            mrFraccion.menu();
         } catch (NumberFormatException e) {
             System.out.println("\tIngresa un dato válido.");
             try {
@@ -28,10 +27,8 @@ public class mainFraccion {
                 e1.printStackTrace();
             }
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -64,7 +61,7 @@ public class mainFraccion {
                 menu();
                 break;
             case 2:
-                buscarMenu();
+                buscarMenu(true);
                 menu();
                 break;
             case 3:
@@ -77,8 +74,36 @@ public class mainFraccion {
                 break;
             case 5:
                 operacionesLayout("+", "S U M A");
+                menu();
                 break;
-
+            case 6:
+                operacionesLayout("-", "R E S T");
+                menu();
+                break;
+            case 7:
+                operacionesLayout("x", "M U L T");
+                menu();
+                break;
+            case 8:
+                operacionesLayout("/", "D I V I");
+                menu();
+                break;
+            case 9:
+                simplificar();
+                menu();
+                break;
+            case 10:
+                mcd();
+                menu();
+                break;
+            case 11:
+                mcm();
+                menu();
+                break;
+            case 12:
+                descompMenu();
+                menu();
+                break;
             default:
                 break;
         }
@@ -86,13 +111,13 @@ public class mainFraccion {
 
     private int ingresar(String s, int opt, boolean tab) throws IOException {
         int iResult;
-        System.out.print("\t" + (tab ? "\t" : "") + "╔═══════════╦═════════════════════════╗");
+        System.out.print("\t" + (tab ? "\t" : "") + "╔═══════════╦═══════════════════════════╗");
         if (opt == 0)
             System.out.print("\n\t" + (tab ? "\t" : "") + "║  " + s + "  ║  Ingresa la opción:  ");
         else if (opt == 1)
             System.out.print("\n\t" + (tab ? "\t" : "") + "║  " + s + "  ║  Ingresa el dato:  ");
         iResult = Integer.parseInt(rdData.readLine());
-        System.out.println("\t" + (tab ? "\t" : "") + "╚═══════════╩═════════════════════════╝");
+        System.out.println("\t" + (tab ? "\t" : "") + "╚═══════════╩═══════════════════════════╝");
         return iResult;
     }
 
@@ -107,7 +132,7 @@ public class mainFraccion {
         return fr;
     }
 
-    private void buscarMenu() throws Exception {
+    private void buscarMenu(boolean keep) throws Exception {
         System.out.println("\t\t╔═══════════════╦═══════════════════════╗");
         System.out.println("\t\t║  B U S C A R  ║    1. Por numerador   ║");
         System.out.println("\t\t╠═══════════════╝    2. Por denominador ║");
@@ -122,6 +147,8 @@ public class mainFraccion {
             if (iFr < frToUse.size())
                 mRegistro.setFrActual(frToUse.get(iFr));
         }
+        if (keep)
+            menu();
     }
 
     private void hacerLista() {
@@ -141,23 +168,17 @@ public class mainFraccion {
     }
 
     private void operacionesLayout(String signo, String header) throws Exception {
-        if (mRegistro.getFrActual() == null) {
-            System.out.println("\t\t╔════════════════════════════════════╗");
-            System.out.println("\t\t║  Seleccione primero una fracción   ║");
-            System.out.println("\t\t║  con la opción de Buscar.          ║");
-            System.out.println("\t\t╚════════════════════════════════════╝");
-            menu();
-        } else {
+        if (isSelected()) {
             Fraccion primera = mRegistro.getFrActual(), segunda = null;
             System.out.println("\t\t╔════════════════════════════════════╗");
-            System.out.println("\t\t║  Para obtener la segunda fracción, ║");
-            System.out.println("\t\t║  quieres:                          ║");
-            System.out.println("\t\t║    1. Seleccionar existente        ║");
-            System.out.println("\t\t║    2. Crear nueva fracción         ║");
+            System.out.println("\t\t║   Para obtener la segunda fracción,  ║");
+            System.out.println("\t\t║   quieres:                           ║");
+            System.out.println("\t\t║     1. Seleccionar existente         ║");
+            System.out.println("\t\t║     2. Crear nueva fracción          ║");
             System.out.println("\t\t╚════════════════════════════════════╝");
             int opt = ingresar("S U M A", 0, true);
             if (opt == 1) {
-                buscarMenu();
+                buscarMenu(false);
                 segunda = mRegistro.getFrActual();
             } else if (opt == 2) {
                 segunda = numDenMenu("C R E A R");
@@ -170,7 +191,86 @@ public class mainFraccion {
             int num = ingresar("N U M D", 1, true);
             System.out.println("\t\t║  Introduce el den. de tu resultado: ║");
             int den = ingresar("D E N D", 1, true);
+            String sResult = "Incorrecto.";
 
+            if (signo.equals("+")) {
+                if (Operaciones.suma(primera, segunda).equals(new Fraccion(num, den)))
+                    sResult = "Correcto :D";
+            } else if (signo.equals("-")) {
+                if (Operaciones.resta(primera, segunda).equals(new Fraccion(num, den)))
+                    sResult = "Correcto :D";
+
+            } else if (signo.equals("x")) {
+                if (Operaciones.multiplicacion(primera, segunda).equals(new Fraccion(num, den)))
+                    sResult = "Correcto :D";
+
+            } else if (signo.equals("/")) {
+                if (Operaciones.division(primera, segunda).equals(new Fraccion(num, den)))
+                    sResult = "Correcto :D";
+            }
+            System.out.println("\t\t╔═══════════╦═════════════════════════╗");
+            System.out.println("\t\t║  " + header + "  ║       " + sResult + "       ║");
+            System.out.println("\t\t╚═══════════╩═════════════════════════╝");
+        }
+    }
+
+    private boolean isSelected() throws Exception {
+        boolean bResult = mRegistro.getFrActual() != null;
+        if (!bResult) {
+            System.out.println("\t\t╔════════════════════════════════════╗");
+            System.out.println("\t\t║  Seleccione primero una fracción   ║");
+            System.out.println("\t\t║  con la opción de Buscar.          ║");
+            System.out.println("\t\t╚════════════════════════════════════╝");
+            buscarMenu(true);
+        }
+        return bResult;
+    }
+
+    private void simplificar() throws Exception {
+        if (isSelected()) {
+            Fraccion fr = new Fraccion(mRegistro.getFrActual().getNum(), mRegistro.getFrActual().getDen());
+            int mcd = Operaciones.maxComDivisor(mRegistro.getFrActual());
+            fr.setNum(fr.getNum() / mcd);
+            fr.setDen(fr.getDen() / mcd);
+            System.out.println("\t\t╔═══════════╦═══════════════════════════╗");
+            System.out.println("\t\t║  S I M P  ║     " + mRegistro.getFrActual().toString() + "  =  " + fr.toString()
+                    + "      ║");
+            System.out.println("\t\t╠═══════════╩═══════════════════════════╣");
+            System.out.println("\t\t║   ¿Desea sustituir la fracción por    ║");
+            System.out.println("\t\t║   la simplificada?   1. Si   2. No    ║");
+            int opt = ingresar("S I M P", 0, true);
+            if (opt == 1)
+                mRegistro.addToFile(fr);
+        }
+    }
+
+    private void mcd() throws Exception {
+        if (isSelected()) {
+            System.out.println("\t\t╔═══════════╦═══════════════════════════╗");
+            System.out.println("\t\t║  M C Div  ║     " + mRegistro.getFrActual().toString() + "  =  "
+                    + Operaciones.maxComDivisor(mRegistro.getFrActual()));
+            System.out.println("\t\t╚═══════════╩═══════════════════════════╝");
+        }
+    }
+
+    private void mcm() throws Exception {
+        if (isSelected()) {
+            System.out.println("\t\t╔═══════════╦═══════════════════════════╗");
+            System.out.println("\t\t║  M C Múl  ║     " + mRegistro.getFrActual().toString() + "  =  "
+                    + Operaciones.minComMultiplo(mRegistro.getFrActual()));
+            System.out.println("\t\t╚═══════════╩═══════════════════════════╝");
+        }
+    }
+
+    private void descompMenu() throws Exception {
+        if (isSelected()) {
+            Fraccion fr = mRegistro.getFrActual();
+            System.out.println("\t\t╔══════════════════╦════════════════════╗");
+            System.out.println(
+                    "\t\t║  Descomposición  ║  " + fr.getNum() + " = " + Operaciones.divisores(fr.getNum()).toString());
+            System.out.println(
+                    "\t\t╠══════════════════╣  " + fr.getDen() + " = " + Operaciones.divisores(fr.getDen()).toString());
+            System.out.println("\t\t╚══════════════════╩════════════════════╝");
         }
     }
 

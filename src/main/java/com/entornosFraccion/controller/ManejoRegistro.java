@@ -108,6 +108,8 @@ public class ManejoRegistro {
                     if (hashFraccion.get(indice).equals(frIn))
                         hashFraccion.remove(indice);
                 }
+
+                setToFileReg(hashFraccion);
             } else {
                 throw new RegistroVacioException();
             }
