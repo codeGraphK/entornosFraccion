@@ -82,5 +82,21 @@ public class OperacionesTest {
 		assertEquals(numResult, Operaciones.division(new Fraccion(iUno, iDos), new Fraccion(iDos,iUno)).getNum());
 		assertEquals(denResult, Operaciones.division(new Fraccion(iUno, iDos), new Fraccion(iDos,iUno)).getDen());
 	}
+	
+	@DisplayName(value = "Suma")
+	@ParameterizedTest
+	@CsvSource(value = { "8,4,80,32", "6,3,45,18", "10,5,125,50"})
+	public void sumaTest(int iUno, int iDos, int numResult, int denResult) {
+		assertEquals(numResult, Operaciones.suma(new Fraccion(iUno, iDos), new Fraccion(iDos,iUno)).getNum());
+		assertEquals(denResult, Operaciones.suma(new Fraccion(iUno, iDos), new Fraccion(iDos,iUno)).getDen());
+	}
+	
+	@DisplayName(value = "Multiplicación")
+	@ParameterizedTest
+	@CsvSource(value = { "8,4,32,32", "6,3,18,18", "10,5,50,50"})
+	public void multiplicaciónTest(int iUno, int iDos, int numResult, int denResult) {
+		assertEquals(numResult, Operaciones.multiplicacion(new Fraccion(iUno, iDos), new Fraccion(iDos,iUno)).getNum());
+		assertEquals(denResult, Operaciones.multiplicacion(new Fraccion(iUno, iDos), new Fraccion(iDos,iUno)).getDen());
+	}
     
 }
