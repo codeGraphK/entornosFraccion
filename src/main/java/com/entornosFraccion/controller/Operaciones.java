@@ -71,6 +71,17 @@ public class Operaciones {
 		return bPrimo;
 	}
 	
+	public static Fraccion suma(Fraccion frUno, Fraccion frDos) {
+		Fraccion frResult = null;
+
+		int resultDen = frUno.getDen() * frDos.getDen();
+		int resultNum = (frUno.getNum() * frDos.getDen()) + (frUno.getDen() * frDos.getNum());
+		
+		frResult = new Fraccion(resultNum, resultDen);
+
+		return frResult;
+	}
+
 	public static Fraccion resta(Fraccion frUno, Fraccion frDos) {
 		Fraccion frResult = null;
 
@@ -82,6 +93,17 @@ public class Operaciones {
 		return frResult;
 	}
 	
+	public static Fraccion multiplicacion(Fraccion frUno, Fraccion frDos) {
+		Fraccion frResult = null;
+
+		int resultNum = frUno.getNum() * frDos.getNum();
+		int resultDen = frUno.getDen() * frDos.getDen();
+		
+		frResult = new Fraccion(resultNum, resultDen);
+
+		return frResult;
+	}
+
 	public static Fraccion division(Fraccion frUno, Fraccion frDos) {
 		Fraccion frResult = null;
 
@@ -91,7 +113,6 @@ public class Operaciones {
 		frResult = new Fraccion(resultNum, resultDen);
 
 		return frResult;
-
 	}
 
 	public static Integer maxComDivisor(Fraccion frIn) {
